@@ -197,4 +197,100 @@ defmodule MailveProject.Emails do
   def change_email(%Email{} = email, attrs \\ %{}) do
     Email.changeset(email, attrs)
   end
+
+  alias MailveProject.Emails.ListOfEmails
+
+  @doc """
+  Returns the list of list_of_emails.
+
+  ## Examples
+
+      iex> list_list_of_emails()
+      [%ListOfEmails{}, ...]
+
+  """
+  def list_list_of_emails do
+    Repo.all(ListOfEmails)
+  end
+
+  @doc """
+  Gets a single list_of_emails.
+
+  Raises `Ecto.NoResultsError` if the List of emails does not exist.
+
+  ## Examples
+
+      iex> get_list_of_emails!(123)
+      %ListOfEmails{}
+
+      iex> get_list_of_emails!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_list_of_emails!(id), do: Repo.get!(ListOfEmails, id)
+
+  @doc """
+  Creates a list_of_emails.
+
+  ## Examples
+
+      iex> create_list_of_emails(%{field: value})
+      {:ok, %ListOfEmails{}}
+
+      iex> create_list_of_emails(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_list_of_emails(attrs \\ %{}) do
+    %ListOfEmails{}
+    |> ListOfEmails.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a list_of_emails.
+
+  ## Examples
+
+      iex> update_list_of_emails(list_of_emails, %{field: new_value})
+      {:ok, %ListOfEmails{}}
+
+      iex> update_list_of_emails(list_of_emails, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_list_of_emails(%ListOfEmails{} = list_of_emails, attrs) do
+    list_of_emails
+    |> ListOfEmails.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a list_of_emails.
+
+  ## Examples
+
+      iex> delete_list_of_emails(list_of_emails)
+      {:ok, %ListOfEmails{}}
+
+      iex> delete_list_of_emails(list_of_emails)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_list_of_emails(%ListOfEmails{} = list_of_emails) do
+    Repo.delete(list_of_emails)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking list_of_emails changes.
+
+  ## Examples
+
+      iex> change_list_of_emails(list_of_emails)
+      %Ecto.Changeset{data: %ListOfEmails{}}
+
+  """
+  def change_list_of_emails(%ListOfEmails{} = list_of_emails, attrs \\ %{}) do
+    ListOfEmails.changeset(list_of_emails, attrs)
+  end
 end

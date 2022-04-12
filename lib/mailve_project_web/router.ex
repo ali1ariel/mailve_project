@@ -18,6 +18,15 @@ defmodule MailveProjectWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+
+
+    live "/list_of_emails", ListOfEmailsLive.Index, :index
+    live "/list_of_emails/new", ListOfEmailsLive.Index, :new
+    live "/list_of_emails/:id/edit", ListOfEmailsLive.Index, :edit
+
+    live "/list_of_emails/:id", ListOfEmailsLive.Show, :show
+    live "/list_of_emails/:id/show/edit", ListOfEmailsLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

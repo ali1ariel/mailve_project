@@ -1,0 +1,50 @@
+<h1>Listing Emails</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.list_of_emails_index_path(@socket, :index)}>
+    <.live_component
+      module={MailveProjectWeb.ListOfEmailsLive.FormComponent}
+      id={@list_of_emails.id || :new}
+      title={@page_title}
+      action={@live_action}
+      list_of_emails={@list_of_emails}
+      return_to={Routes.list_of_emails_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<div>
+  <div id="list_of_emails">
+    <%= for list_of_emails <- @list_of_emails_collection do %>
+      <div id={"email-#{list_of_emails.id}"}>
+        <label>subject:</label> <div><%=list_of_emails.email.subject %></div>
+        <label>body:</label> <div><%=list_of_emails.email.body |> String.split_at(300) |> then(fn {string, out} -> string <> if out != "" do "..." else "" end end) %></div>
+        <div>
+          <span><%= live_redirect "Show", to: Routes.list_of_emails_show_path(@socket, :show, list_of_emails) %></span>
+          <span><%= live_patch "Edit", to: Routes.list_of_emails_index_path(@socket, :edit, list_of_emails) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: list_of_emails.id, data: [confirm: "Are you sure?"] %></span>
+        </div>
+        <div>
+          <% IO.inspect list_of_emails.email_infos %>
+          <div>
+            <div>
+              <label>Associated users:</label> <%= Enum.count(list_of_emails.email_infos) %>
+            </div>
+            <div>
+              <label>Users with successful:</label> <%= Enum.count(list_of_emails.email_infos |> Enum.filter(& &1.successful == true)) %>
+            </div>
+            <div>
+              <label>Users with failure:</label> <%= Enum.count(list_of_emails.email_infos |> Enum.filter(& &1.successful == false)) %>
+            </div>
+            <div>
+              <label>Users not tried:</label> <%= Enum.count(list_of_emails.email_infos |> Enum.filter(&is_nil(&1.successful))) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+    <% end %>
+  </div>
+</div>
+
+<span><%= live_patch "New List of emails", to: Routes.list_of_emails_index_path(@socket, :new) %></span>

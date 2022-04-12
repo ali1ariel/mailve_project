@@ -6,7 +6,7 @@ defmodule MailveProject.Repo.Migrations.CreateEmailInfos do
       add :target, :string
       add :full_info, :text
       add :successful, :boolean, null: true
-      add :send_at, :datetime
+      add :send_at, :naive_datetime
 
       timestamps()
     end

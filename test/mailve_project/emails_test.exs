@@ -116,4 +116,56 @@ defmodule MailveProject.EmailsTest do
       assert %Ecto.Changeset{} = Emails.change_email(email)
     end
   end
+
+  describe "list_of_emails" do
+    alias MailveProject.Emails.ListOfEmails
+
+    import MailveProject.EmailsFixtures
+
+    @invalid_attrs %{}
+
+    test "list_list_of_emails/0 returns all list_of_emails" do
+      list_of_emails = list_of_emails_fixture()
+      assert Emails.list_list_of_emails() == [list_of_emails]
+    end
+
+    test "get_list_of_emails!/1 returns the list_of_emails with given id" do
+      list_of_emails = list_of_emails_fixture()
+      assert Emails.get_list_of_emails!(list_of_emails.id) == list_of_emails
+    end
+
+    test "create_list_of_emails/1 with valid data creates a list_of_emails" do
+      valid_attrs = %{}
+
+      assert {:ok, %ListOfEmails{} = list_of_emails} = Emails.create_list_of_emails(valid_attrs)
+    end
+
+    test "create_list_of_emails/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Emails.create_list_of_emails(@invalid_attrs)
+    end
+
+    test "update_list_of_emails/2 with valid data updates the list_of_emails" do
+      list_of_emails = list_of_emails_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %ListOfEmails{} = list_of_emails} = Emails.update_list_of_emails(list_of_emails, update_attrs)
+    end
+
+    test "update_list_of_emails/2 with invalid data returns error changeset" do
+      list_of_emails = list_of_emails_fixture()
+      assert {:error, %Ecto.Changeset{}} = Emails.update_list_of_emails(list_of_emails, @invalid_attrs)
+      assert list_of_emails == Emails.get_list_of_emails!(list_of_emails.id)
+    end
+
+    test "delete_list_of_emails/1 deletes the list_of_emails" do
+      list_of_emails = list_of_emails_fixture()
+      assert {:ok, %ListOfEmails{}} = Emails.delete_list_of_emails(list_of_emails)
+      assert_raise Ecto.NoResultsError, fn -> Emails.get_list_of_emails!(list_of_emails.id) end
+    end
+
+    test "change_list_of_emails/1 returns a list_of_emails changeset" do
+      list_of_emails = list_of_emails_fixture()
+      assert %Ecto.Changeset{} = Emails.change_list_of_emails(list_of_emails)
+    end
+  end
 end

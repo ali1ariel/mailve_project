@@ -34,4 +34,18 @@ defmodule MailveProject.EmailsFixtures do
 
     email
   end
+
+  @doc """
+  Generate a list_of_emails.
+  """
+  def list_of_emails_fixture(attrs \\ %{}) do
+    {:ok, list_of_emails} =
+      attrs
+      |> Enum.into(%{
+
+      })
+      |> MailveProject.Emails.create_list_of_emails()
+
+    list_of_emails
+  end
 end
